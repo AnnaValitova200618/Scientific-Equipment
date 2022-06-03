@@ -1,0 +1,44 @@
+﻿<Window x:Class="Scientific_Equipment.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Scientific_Equipment"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="700" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="64*"/>
+
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Text="Реестр оборудования" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Normal" FontFamily="Microsoft New Tai Lue" />
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal"  Height="57" Width="700" Margin="0,0,0,0" VerticalAlignment="Bottom">
+            <Button Content="Работники"   FontSize="16" BorderBrush="#FF544C4C" BorderThickness="2,2,2,2" Command="{Binding OpenScientists}" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" Width="150" Margin="70,0,0,5"/>
+            <Button  Content="Бронирование" FontSize="16" BorderBrush="#FF544C4C" BorderThickness="2,2,2,2" Command="{Binding OpenBooking}" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" Width="150" Margin="50,0,0,5"/>
+            <Button  Content="Тест связи с БД" FontSize="16" BorderBrush="#FF544C4C" BorderThickness="2,2,2,2" Command="{Binding OpenTest}" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" Width="150" Margin="50,0,0,5"/>
+                  </StackPanel>
+
+        <ListView ItemsSource="{Binding Equipments}" SelectedItem="{Binding SelectedEquipment}" Grid.Row="1" BorderThickness="5,5,5,5" Margin="14,0,27,0"  BorderBrush="#FF626262" Height="452" VerticalAlignment="Top" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Название" Width="150" DisplayMemberBinding="{Binding name}"/>
+                    <GridViewColumn Header="Ответственный" Width="120" DisplayMemberBinding="{Binding Scientists.lastname}"/>
+                    <GridViewColumn Header="Габариты" Width="150" DisplayMemberBinding="{Binding dimensions}"/>
+                    <GridViewColumn Header="Вес (кг)" Width="100" DisplayMemberBinding="{Binding weight}"/>
+                    <GridViewColumn Header="Статус" Width="100" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+
+
+
+
+    </Grid>
+</Window>
