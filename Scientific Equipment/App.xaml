@@ -1,0 +1,9 @@
+﻿<Application x:Class="Scientific_Equipment.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Scientific_Equipment"
+             > 
+    <Application.MainWindow>
+        <local:Login Visibility ="Visible"/>
+    </Application.MainWindow>
+</Application>
