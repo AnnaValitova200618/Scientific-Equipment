@@ -17,7 +17,9 @@
                     <GridViewColumn Header="Имя" Width="100" DisplayMemberBinding="{Binding firstname}"/>
                     <GridViewColumn Header="Отчество" Width="120" DisplayMemberBinding="{Binding patronymic}"/>
                     <GridViewColumn Header="Фамилия" Width="120" DisplayMemberBinding="{Binding lastname}"/>
-                    <GridViewColumn Header="Должность" Width="135" DisplayMemberBinding="{Binding position}"/>
+
+                    <GridViewColumn Header="Должность" Width="135" DisplayMemberBinding="{Binding position.Title}"/>
+
                     <GridViewColumn Header="Логин" Width="120" DisplayMemberBinding="{Binding login}"/>
                 </GridView>
             </ListView.View>
@@ -30,7 +32,9 @@
             <Label Content="Фамилия" FontStyle="Italic" FontSize="12" Margin="4,0,0,0" HorizontalAlignment="Left"/>
             <TextBox IsReadOnly="True" Style="{x:Null}" Width="550" HorizontalAlignment="Left" Margin="3,0,0,0" Text="{Binding lastname}"/>
             <Label Content="Должность" FontStyle="Italic" FontSize="12" Margin="4,0,0,0" HorizontalAlignment="Left" />
-            <TextBox IsReadOnly="True" Style="{x:Null}" Width="550" HorizontalAlignment="Left" Margin="3,0,0,0" Text="{Binding position}"/>
+
+            <TextBox IsReadOnly="True" Style="{x:Null}" Width="550" HorizontalAlignment="Left" Margin="3,0,0,0" Text="{Binding position.Title}"/>
+
             <Label Content="Логин" FontStyle="Italic" FontSize="12" Margin="4,0,0,0" HorizontalAlignment="Left" />
             <TextBox IsReadOnly="True" Style="{x:Null}" Width="550" HorizontalAlignment="Left" Margin="3,0,0,0" Text="{Binding login}"/>
         </StackPanel>

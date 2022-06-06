@@ -23,5 +23,8 @@ namespace Scientific_Equipment.DTO
         public int id_responsible { get; set; }
 
         public Scientists Scientists { get; set; }
+
+        public string Status { get; set; }
+
     }
 }

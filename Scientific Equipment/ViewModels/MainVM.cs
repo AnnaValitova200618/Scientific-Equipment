@@ -10,15 +10,12 @@ namespace Scientific_Equipment.ViewModels
 {
     class MainVM: BaseVM
     {
-      
-        
-        public CommandVM Login { get; set; }
+     
 
         public MainVM()
         {
 
-            
-            Login = new CommandVM(() => { new MainWindow().Show(); });
+
         }
     }
 }

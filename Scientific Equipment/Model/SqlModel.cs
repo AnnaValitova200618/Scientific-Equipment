@@ -3,6 +3,9 @@ using Scientific_Equipment.DTO;
 using Scientific_Equipment.Tools;
 using System;
 using System.Collections.Generic;
+
+using System.Collections.ObjectModel;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +24,66 @@ namespace Scientific_Equipment.Model
         }
 
 
+        internal List<Equipment> SelectEquipments()
+        {
+            List<Equipment> equipments = new List<Equipment>();
+            string query = "select * from equipment";
+            var mySqlDB = MySqlDB.GetDB();
+            if (mySqlDB.OpenConnection())
+            {
+                using (MySqlCommand mc = new MySqlCommand(query, mySqlDB.sqlConnection))
+                using (MySqlDataReader dr = mc.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        equipments.Add(new Equipment
+                        {
+                            ID = dr.GetInt32("ID"),
+                            name = dr.GetString("Name"),
+                            dimensions = dr.GetString("Dimensions"),
+                            weight = dr.GetDecimal("Weight"),
+                            id_responsible = dr.GetInt32("ID_responsible")
+
+
+                        });
+                    }
+                }
+                
+                mySqlDB.CloseConnection();
+            }
+            return equipments;
+        }
+
+        internal ObservableCollection<Equipment_schedile> GetHistory(Equipment equipment)
+        {
+            ObservableCollection<Equipment_schedile> result = new ObservableCollection<Equipment_schedile>();
+            string query = "SELECT * FROM equipment_schedile JOIN scientists s ON equipment_schedile.ID_scientists = s.ID WHERE ID_equipment = " + equipment.ID;
+            var mySqlDB = MySqlDB.GetDB();
+            if (mySqlDB.OpenConnection())
+            {
+                using (MySqlCommand mc = new MySqlCommand(query, mySqlDB.sqlConnection))
+                using (MySqlDataReader dr = mc.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        result.Add(new Equipment_schedile
+                        {
+                            ID = dr.GetInt32("ID"),
+                            date_start = dr.GetDateTime("Date_start"),
+                            date_end = dr.GetDateTime("Date_end"),
+                            id_equipment = dr.GetInt32("ID_equipment"),
+                            id_scientists = dr.GetInt32("ID_scientists"),
+                            Equipment = equipment, 
+                            ScientistsBooking = new Scientists { lastname = dr.GetString("Lastname") }
+                        }); 
+                    }
+                }
+                
+                mySqlDB.CloseConnection();
+            }
+
+            return result;
+        }
 
 
         //INSERT INTO `group` set title='1125', year = 2018;
@@ -74,7 +137,9 @@ namespace Scientific_Equipment.Model
         {
             var scientists = new List<Scientists>();
             var mySqlDB = MySqlDB.GetDB();
-            string query = "select * from scientists";
+
+            string query = "select * FROM scientists JOIN positions ON idPosition = positions.id";
+
             if (mySqlDB.OpenConnection())
             {
                 using (MySqlCommand mc = new MySqlCommand(query, mySqlDB.sqlConnection))
@@ -90,7 +155,9 @@ namespace Scientific_Equipment.Model
                             lastname = dr.GetString("Lastname"),
                             login = dr.GetString("Login"),
                             password = dr.GetString("Password"),
-                            position = dr.GetString("Position")
+
+                            position = new Position { ID = dr.GetInt32("idPosition"),  Title = dr.GetString("title") }
+
                         });
                     }
                 }
@@ -124,6 +191,22 @@ namespace Scientific_Equipment.Model
                         });
                     }
                 }
+
+                query = "SELECT ID_equipment FROM equipment_schedile es WHERE CURRENT_DATE() BETWEEN es.Date_start and es.Date_end";
+                int id;
+                using (MySqlCommand mc = new MySqlCommand(query, mySqlDB.sqlConnection))
+                using (MySqlDataReader dr = mc.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        id = dr.GetInt32("ID_equipment");
+                        var item = equipments.FirstOrDefault(s => s.ID == id);
+                        if (item != null)
+                            item.Status = "Забронировано";
+                    }
+                }
+
+
                 mySqlDB.CloseConnection();
             }
             return equipments;

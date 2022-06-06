@@ -25,9 +25,8 @@ namespace Scientific_Equipment.DTO
 
         [Column("Password")]
         public string password { get; set; }
-
-        [Column("Position")]
-        public string position { get; set; }
+        
+        public Position position { get; set; }
 
     }
 }
