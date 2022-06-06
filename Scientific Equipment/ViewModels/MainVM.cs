@@ -10,14 +10,12 @@ namespace Scientific_Equipment.ViewModels
 {
     class MainVM: BaseVM
     {
-      
-        
-       
+     
 
         public MainVM()
         {
 
-                      
+
         }
     }
 }

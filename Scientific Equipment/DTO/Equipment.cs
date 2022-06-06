@@ -25,5 +25,6 @@ namespace Scientific_Equipment.DTO
         public Scientists Scientists { get; set; }
 
         public string Status { get; set; }
+
     }
 }

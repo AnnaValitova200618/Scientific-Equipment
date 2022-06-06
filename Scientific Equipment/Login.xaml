@@ -31,5 +31,6 @@
         </StackPanel>
 
         <Button Grid.Column="1" Content="Войти" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="105,0,0,20" Width="100" Height="30" FontSize="16" Click="Button_Click"/>
+
     </Grid>
 </Window>

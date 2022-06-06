@@ -3,7 +3,9 @@ using Scientific_Equipment.DTO;
 using Scientific_Equipment.Tools;
 using System;
 using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace Scientific_Equipment.Model
                 sqlModel = new SqlModel();
             return sqlModel;
         }
+
 
         internal List<Equipment> SelectEquipments()
         {
@@ -134,7 +137,9 @@ namespace Scientific_Equipment.Model
         {
             var scientists = new List<Scientists>();
             var mySqlDB = MySqlDB.GetDB();
+
             string query = "select * FROM scientists JOIN positions ON idPosition = positions.id";
+
             if (mySqlDB.OpenConnection())
             {
                 using (MySqlCommand mc = new MySqlCommand(query, mySqlDB.sqlConnection))
@@ -150,7 +155,9 @@ namespace Scientific_Equipment.Model
                             lastname = dr.GetString("Lastname"),
                             login = dr.GetString("Login"),
                             password = dr.GetString("Password"),
+
                             position = new Position { ID = dr.GetInt32("idPosition"),  Title = dr.GetString("title") }
+
                         });
                     }
                 }
@@ -184,6 +191,7 @@ namespace Scientific_Equipment.Model
                         });
                     }
                 }
+
                 query = "SELECT ID_equipment FROM equipment_schedile es WHERE CURRENT_DATE() BETWEEN es.Date_start and es.Date_end";
                 int id;
                 using (MySqlCommand mc = new MySqlCommand(query, mySqlDB.sqlConnection))
@@ -197,6 +205,7 @@ namespace Scientific_Equipment.Model
                             item.Status = "Забронировано";
                     }
                 }
+
 
                 mySqlDB.CloseConnection();
             }

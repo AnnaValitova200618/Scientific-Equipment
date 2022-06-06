@@ -25,8 +25,7 @@ namespace Scientific_Equipment
     {
         public Login()
         {
-            InitializeComponent();
-            
+            InitializeComponent();           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

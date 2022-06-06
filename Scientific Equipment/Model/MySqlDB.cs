@@ -17,6 +17,7 @@ namespace Scientific_Equipment.Model
                 db = new MySqlDB();
             return db;
         }
+
         public MySqlConnection
               GetConnection()
         {
@@ -25,6 +26,7 @@ namespace Scientific_Equipment.Model
 
             return sqlConnection;
         }
+
         internal MySqlConnection sqlConnection = null;
 
         internal void InitConnection()
