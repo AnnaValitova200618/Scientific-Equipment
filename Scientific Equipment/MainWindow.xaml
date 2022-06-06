@@ -29,7 +29,7 @@
                     <GridViewColumn Header="Ответственный" Width="120" DisplayMemberBinding="{Binding Scientists.lastname}"/>
                     <GridViewColumn Header="Габариты" Width="150" DisplayMemberBinding="{Binding dimensions}"/>
                     <GridViewColumn Header="Вес (кг)" Width="100" DisplayMemberBinding="{Binding weight}"/>
-                    <GridViewColumn Header="Статус" Width="100" />
+                    <GridViewColumn Header="Статус" Width="100" DisplayMemberBinding="{Binding Status}"/>
                 </GridView>
             </ListView.View>
         </ListView>

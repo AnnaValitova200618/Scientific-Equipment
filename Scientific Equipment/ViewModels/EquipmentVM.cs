@@ -4,9 +4,11 @@ using Scientific_Equipment.MoreWindows;
 using Scientific_Equipment.Tools;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Scientific_Equipment.ViewModels
 {
@@ -16,8 +18,8 @@ namespace Scientific_Equipment.ViewModels
         public CommandVM OpenScientists { get; set; }
         public CommandVM OpenBooking { get; set; }
 
-        private List<Equipment> equipments;
-        public List<Equipment> Equipments
+        private ObservableCollection<Equipment> equipments;
+        public ObservableCollection<Equipment> Equipments
         {
             get => equipments;
             set
@@ -27,17 +29,31 @@ namespace Scientific_Equipment.ViewModels
             }
         }
 
+        public Equipment SelectedEquipment { get; set; }
+
         public EquipmentVM()
         {
             var db = SqlModel.GetInstance();
-            Equipments = SqlModel.GetInstance().ListEquipments();
-            
+            LoadEquipments();
 
+            OpenBooking = new CommandVM(() =>
+            {
+                if (SelectedEquipment == null)
+                {
+                    MessageBox.Show("Не выбрано оборудование");
+                    return;
+                }
+                new Booking(SelectedEquipment).ShowDialog();
+                LoadEquipments();
 
-            OpenBooking = new CommandVM(() => { new Booking().Show(); });
+            });
             OpenTest = new CommandVM(() => { new Test().Show(); });
             OpenScientists = new CommandVM(() => { new ScientistsWindow().Show(); });
         }
 
+        private void LoadEquipments()
+        {
+            Equipments = new ObservableCollection<Equipment>(SqlModel.GetInstance().ListEquipments());
+        }
     }
 }

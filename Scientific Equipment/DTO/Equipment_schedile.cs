@@ -23,5 +23,7 @@ namespace Scientific_Equipment.DTO
         public DateTime date_end { get; set; }
 
         public Equipment Equipment { get; set; }
+
+        public Scientists ScientistsBooking { get; set; }
     }
 }

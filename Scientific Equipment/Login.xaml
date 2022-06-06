@@ -21,9 +21,9 @@
                 <TextBox x:Name="TextLogin" Height="29" Width="306" HorizontalAlignment="Center" Margin="0,31,12,0"  FontSize="16" VerticalAlignment="Center">
 
                 </TextBox>
-                <TextBox x:Name="TextPassword" Height="29" Width="306" HorizontalAlignment="Center" Margin="0,24,12,2" FontSize="16" VerticalAlignment="Center">
+                <PasswordBox x:Name="TextPassword" Height="29" Width="306" HorizontalAlignment="Center" Margin="0,24,12,2" FontSize="16" VerticalAlignment="Center">
 
-                </TextBox>
+                </PasswordBox>
 
 
             </StackPanel>

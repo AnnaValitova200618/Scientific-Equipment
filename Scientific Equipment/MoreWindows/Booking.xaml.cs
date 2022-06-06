@@ -1,4 +1,5 @@
-﻿using Scientific_Equipment.ViewModels;
+﻿using Scientific_Equipment.DTO;
+using Scientific_Equipment.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace Scientific_Equipment.MoreWindows
     /// </summary>
     public partial class Booking : Window
     {
-        public Booking()
+        public Booking(Equipment equipment)
         {
             InitializeComponent();
-            DataContext = new Equipment_schedileVM();
+            DataContext = new Equipment_schedileVM(equipment);
         }
     }
 }

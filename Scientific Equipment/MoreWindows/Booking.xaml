@@ -15,26 +15,27 @@
         <StackPanel Grid.Column="0" Margin="0,53,533,41" Grid.ColumnSpan="2">
             <TextBlock Text="Бронирование" FontFamily="Microsoft New Tai Lue" Margin="0,0,0,0" Width="374" HorizontalAlignment="Center" FontSize="24" TextAlignment="Center" FontWeight="Bold"  />
             <TextBlock Text="Название оборудования" FontSize="16" FontFamily="Bahnschrift SemiLight" Margin="0,15,0,0" Width="374" HorizontalAlignment="Center" Foreground="Black"/>
-            <ComboBox 
-                      ItemsSource="{Binding Equipments}" 
-                      SelectedItem="{Binding SelectedEquipment}"
-                      DisplayMemberPath="name" 
+            <TextBlock Text="{Binding Equipment.name}"
+                Width="374" FontSize="16" HorizontalAlignment="Center" />
+            <TextBlock Text="Ответственный за оборудование" FontSize="16" FontFamily="Bahnschrift SemiLight" Margin="0,15,0,0" Width="374" HorizontalAlignment="Center" Foreground="Black"/>
+            <TextBlock Text="{Binding Equipment.Scientists.lastname}"
                 Width="374" FontSize="16" HorizontalAlignment="Center" />
             <TextBlock Text="Дата начала бронирования" FontSize="16" FontFamily="Bahnschrift SemiLight" Margin="0,15,0,0" Width="374" HorizontalAlignment="Center"/>
-            <DatePicker Background="#FFDADADA" Width="374" FontSize="14"  HorizontalAlignment="Center" />
-            <TextBlock Text="Дата окончания бронирования" FontSize="16" FontFamily="Bahnschrift SemiLight" Margin="0,15,0,0" Width="374" HorizontalAlignment="Center"/>
-            <DatePicker Background="#FFDADADA" Width="374" FontSize="14"  HorizontalAlignment="Center"/>
+            <DatePicker Background="#FFDADADA" Width="374" SelectedDate="{Binding Start}" FontSize="14"  HorizontalAlignment="Center" />
+            <TextBlock Text="Дата окончания бронирования"  FontSize="16" FontFamily="Bahnschrift SemiLight" Margin="0,15,0,0" Width="374" HorizontalAlignment="Center"/>
+            <DatePicker Background="#FFDADADA" Width="374" SelectedDate="{Binding End}" FontSize="14"  HorizontalAlignment="Center"/>
 
         </StackPanel>
         
         <TextBlock Text="Занятость" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Normal" FontFamily="Microsoft New Tai Lue" Height="52" Width="400" TextAlignment="Center" />
-        <Button Content="Забронировать оборудование" Grid.Column="0" Grid.Row="2"  FontSize="16" BorderBrush="#FF544C4C" BorderThickness="2,2,2,2" Margin="0,0,0,15" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-        <ListView BorderThickness="5,5,5,5" Margin="10,10,10,15" Foreground="{x:Null}" BorderBrush="#FF626262" Grid.Column="1" >
+        <Button Content="Забронировать оборудование" Command="{Binding BookingCommand}" Grid.Column="0" Grid.Row="2"  FontSize="16" BorderBrush="#FF544C4C" BorderThickness="2,2,2,2" Margin="0,0,0,15" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        <ListView ItemsSource="{Binding EquipmentSchediles}" BorderThickness="5,5,5,5" Margin="10,10,10,15" BorderBrush="#FF626262" Grid.Column="1" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Название " Width="150"/>
-                    <GridViewColumn Header="Начало бронирования" Width="170" />
-                    <GridViewColumn Header="Окончание бронирования" Width="170"  />
+                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Equipment.name}" Width="150"/>
+                    <GridViewColumn Header="Сотрудник"  DisplayMemberBinding="{Binding ScientistsBooking.lastname}" Width="150"/>
+                    <GridViewColumn Header="Начало бронирования" DisplayMemberBinding="{Binding date_start, StringFormat=dd.MM.yyyy}" Width="170" />
+                    <GridViewColumn Header="Окончание бронирования" DisplayMemberBinding="{Binding date_end, StringFormat=dd.MM.yyyy}" Width="170"  />
                 </GridView>
             </ListView.View>
         </ListView>
